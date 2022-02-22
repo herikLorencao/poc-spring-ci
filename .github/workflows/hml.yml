@@ -49,12 +49,12 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 17
-      - run: mvn -B verify -P coverage --no-transfer-progress
-      - uses: codecov/codecov-action@v1
-        with:
-          file: ./**/target/site/jacoco/jacoco.xml
+      - name: Run Jacoco Coverage
+        run: mvn -B verify -P coverage --no-transfer-progress
       - name: Codecov GitHub Action
         uses: codecov/codecov-action@v2
+        with:
+          file: ./**/target/site/jacoco/jacoco.xml
   sonarqube:
     runs-on: ubuntu-latest
     needs: setup
