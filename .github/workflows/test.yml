@@ -24,6 +24,7 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: 17
+      - run: mvn -B install --no-transfer-progress
       - run: mvn -B verify -P coverage --no-transfer-progress
       - uses: codecov/codecov-action@v2
         with:
