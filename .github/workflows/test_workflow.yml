@@ -52,4 +52,18 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=herikLorencao_poc-spring-ci
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=${{SONAR_PROJECT_KEY}}
+  deploy-hml:
+    runs-on: ubuntu-latest
+    needs: [ coverage, sonarqube ]
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          - id: deploy
+            name: Deploy to dokku
+            uses: idoberko2/dokku-deploy-github-action@v1
+            with:
+              ssh-private-key: ${{ secrets.SERVER_SECRET_KEY }}
+              dokku-host: '137.184.124.49'
+              app-name: 'poc'
