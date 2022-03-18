@@ -67,6 +67,7 @@ jobs:
           ssh-private-key: ${{ secrets.SERVER_SECRET_KEY }}
           dokku-host: '137.184.124.49'
           app-name: 'poc'
+          remote-branch: 'feature/ci'
   discord-notification:
       runs-on: ubuntu-latest
       needs: deploy-hml
