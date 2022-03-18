@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class UserTest {
+ class UserTest {
     @Test
     void constructor() {
         assertAll(() -> new User("Test", 10L));
@@ -22,6 +22,6 @@ class UserTest {
     void talkBadTest() {
         var user = new User("Test", 10L);
         var message = user.talk(false);
-        assertEquals("I have a bad day :", message);
+        assertEquals("I have a bad day :/", message);
     }
 }
