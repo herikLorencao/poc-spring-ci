@@ -2,6 +2,7 @@ package br.com.heriksl.poc.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,4 +14,8 @@ public class HelloController {
 		return ResponseEntity.ok( "Hello World" );
 	}
 
+	@GetMapping("{id}")
+	public ResponseEntity<String> hello(@PathVariable Long id) {
+		return ResponseEntity.ok("Hello world - " + id);
+	}
 }
