@@ -1,0 +1,17 @@
+name: pull-requests
+on:
+  pull_request:
+    types: [ opened, synchronize, reopened ]
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Discord notification
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_PR_WEBHOOK }}
+        uses: sarisia/actions-status-discord@v1
+        with:
+          username: 'Pull Request - Bot'
+          title: "${{ github.event.pull_request.title }}"
+          avatar_url: ${{ secrets.AVATAR_PR_URL }}
+          description: ${{ github.event.pull_requests.url }}
