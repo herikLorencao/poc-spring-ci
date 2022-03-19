@@ -11,4 +11,4 @@ jobs:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         uses: Ilshidur/action-discord@master
         with:
-          args: 'Pull Request aberto: ${{ github.event.pull_request.title }}'
+          args: 'Pull Request disponível \n Título: ${{ github.event.pull_request.title }} \n - Repositório: ${{ github.event.pull_requests.repo }} \n - Autor: ${{ github.event.pull_requests.owner }}'
