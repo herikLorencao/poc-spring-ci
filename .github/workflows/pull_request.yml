@@ -14,4 +14,5 @@ jobs:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
           username: 'Pull Request - Bot'
           title: "${{ github.event.pull_request.title }}"
+          avatar_url: ${{ secrets.AVATAR_PR_URL }}
           description: ${{ github.event.pull_requests.url }}
