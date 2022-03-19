@@ -12,6 +12,6 @@ jobs:
         uses: sarisia/actions-status-discord@v1
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
-          username: ${{ Pull Request - Bot }}
+          username: 'Pull Request - Bot'
           title: "${{ github.event.pull_request.title }}"
           description: ${{ github.event.pull_requests.url }}
