@@ -8,10 +8,9 @@ jobs:
     steps:
       - name: Discord notification
         env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_PR_WEBHOOK }}
         uses: sarisia/actions-status-discord@v1
         with:
-          webhook: ${{ secrets.DISCORD_WEBHOOK }}
           username: 'Pull Request - Bot'
           title: "${{ github.event.pull_request.title }}"
           avatar_url: ${{ secrets.AVATAR_PR_URL }}
