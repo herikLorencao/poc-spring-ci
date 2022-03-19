@@ -1,4 +1,4 @@
-package br.com.heriksl.poc.entity;
+package br.com.heriksl.poc.application.entity;
 
 public class User {
 	private final String name;
