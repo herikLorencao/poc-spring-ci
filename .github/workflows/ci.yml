@@ -59,6 +59,10 @@ jobs:
         - name: Discord notification
           env:
             DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          uses: Ilshidur/action-discord@master
+          uses: sarisia/actions-status-discord@v1
           with:
-            args: 'O projeto ${{ github.event.repository.name }} foi atualizado em homologação'
+            webhook: ${{ secrets.DISCORD_WEBHOOK }}
+            username: 'Bot deploy HML'
+            title: 'Nova versão de HML'
+            avatar_url: ${{ secrets.AVATAR_DEPLOY_URL }}
+            description: 'Nova versão disponível em ${{ secrets.DEPLOY_HML_URL }}'
