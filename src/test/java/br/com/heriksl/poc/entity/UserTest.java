@@ -1,5 +1,6 @@
 package br.com.heriksl.poc.entity;
 
+import br.com.heriksl.poc.application.entity.User;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -22,6 +23,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
     void talkBadTest() {
         var user = new User("Test", 10L);
         var message = user.talk(false);
-        assertEquals("I have a bad day :", message);
+        assertEquals("I have a bad day :/", message);
     }
 }

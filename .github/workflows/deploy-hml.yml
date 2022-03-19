@@ -1,4 +1,4 @@
-name: build
+name: deploy-hml
 on:
   push:
     branches:
@@ -61,7 +61,7 @@ jobs:
             DISCORD_WEBHOOK: ${{ secrets.DISCORD_DEPLOY_HML_WEBHOOK }}
           uses: sarisia/actions-status-discord@v1
           with:
-            username: 'Deploy HML - Bot'
-            title: 'Nova versão de HML'
+            username: 'Deploy HML'
+            title: 'Nova versão de homologação'
             avatar_url: ${{ secrets.AVATAR_DEPLOY_URL }}
             description: 'Nova versão disponível em ${{ secrets.DEPLOY_HML_URL }}'
