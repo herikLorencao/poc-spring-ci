@@ -17,6 +17,7 @@
         <java.version>17</java.version>
         <sonar.organization>heriklorencao</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+        <sonar.coverage.exclusions>src/test/**, src/main/java/br/com/heriksl/poc/application/**, src/main/java/br/com/heriksl/poc/infra/**, src/main/java/br/com/heriksl/poc/Application.java</sonar.coverage.exclusions>
     </properties>
     <dependencies>
         <dependency>
