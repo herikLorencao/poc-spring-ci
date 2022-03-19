@@ -12,4 +12,5 @@ public class HelloController {
 	public ResponseEntity<String> hello() {
 		return ResponseEntity.ok( "Hello World" );
 	}
+
 }
