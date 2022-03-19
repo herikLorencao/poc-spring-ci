@@ -1,8 +1,8 @@
-name: build
+name: deploy-prd
 on:
   push:
     branches:
-      - develop
+      - main
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -53,15 +53,15 @@ jobs:
           app-name: 'poc'
           remote-branch: 'develop'
   discord-notification:
-      runs-on: ubuntu-latest
-      needs: deploy-hml
-      steps:
-        - name: Discord notification
-          env:
-            DISCORD_WEBHOOK: ${{ secrets.DISCORD_DEPLOY_HML_WEBHOOK }}
-          uses: sarisia/actions-status-discord@v1
-          with:
-            username: 'Deploy HML - Bot'
-            title: 'Nova versão de HML'
-            avatar_url: ${{ secrets.AVATAR_DEPLOY_URL }}
-            description: 'Nova versão disponível em ${{ secrets.DEPLOY_HML_URL }}'
+    runs-on: ubuntu-latest
+    needs: deploy-hml
+    steps:
+      - name: Discord notification
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_DEPLOY_HML_WEBHOOK }}
+        uses: sarisia/actions-status-discord@v1
+        with:
+          username: 'Deploy PRD'
+          title: 'Nova versão de produção'
+          avatar_url: ${{ secrets.AVATAR_DEPLOY_URL }}
+          description: 'Nova versão disponível em ${{ secrets.DEPLOY_HML_URL }}'

@@ -1,7 +1,8 @@
-name: pull-requests
+name: deploy-hml
 on:
-  pull_request:
-    types: [ opened, synchronize, reopened ]
+  push:
+    branches:
+      - develop
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -36,15 +37,31 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=${{secrets.SONAR_PROJECT_KEY}}
-  notify:
+  deploy-hml:
     runs-on: ubuntu-latest
+    needs: sonarqube
     steps:
-      - name: Discord notification
-        env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_PR_WEBHOOK }}
-        uses: sarisia/actions-status-discord@v1
+      - uses: actions/checkout@v2
         with:
-          username: 'Pull Request'
-          title: "${{ github.event.pull_request.title }}"
-          avatar_url: ${{ secrets.AVATAR_PR_URL }}
-          description: ${{ github.event.pull_requests.url }}
+          fetch-depth: 0
+      - id: deploy
+        name: Deploy to dokku
+        uses: idoberko2/dokku-deploy-github-action@v1
+        with:
+          ssh-private-key: ${{ secrets.SERVER_SECRET_KEY }}
+          dokku-host: '137.184.124.49'
+          app-name: 'poc'
+          remote-branch: 'develop'
+  discord-notification:
+      runs-on: ubuntu-latest
+      needs: deploy-hml
+      steps:
+        - name: Discord notification
+          env:
+            DISCORD_WEBHOOK: ${{ secrets.DISCORD_DEPLOY_HML_WEBHOOK }}
+          uses: sarisia/actions-status-discord@v1
+          with:
+            username: 'Deploy HML'
+            title: 'Nova versão de homologação'
+            avatar_url: ${{ secrets.AVATAR_DEPLOY_URL }}
+            description: 'Nova versão disponível em ${{ secrets.DEPLOY_HML_URL }}'
