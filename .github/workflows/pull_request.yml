@@ -9,6 +9,9 @@ jobs:
       - name: Discord notification
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-        uses: Ilshidur/action-discord@master
+        uses: sarisia/actions-status-discord@v1
         with:
-          args: 'Pull Request disponível <br> Título: ${{ github.event.pull_request.title }} <br> - Repositório: ${{ github.event.pull_requests.repo }} <br> - Autor: ${{ github.event.pull_requests.owner }}'
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          username: ${{ Pull Request - Bot }}
+          title: "${{ github.event.pull_request.title }}"
+          description: ${{ github.event.pull_requests.url }}
