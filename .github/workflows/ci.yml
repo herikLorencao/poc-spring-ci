@@ -3,8 +3,6 @@ on:
   push:
     branches:
       - develop
-  pull_request:
-    types: [ opened, synchronize, reopened ]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -63,4 +61,4 @@ jobs:
             DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
           uses: Ilshidur/action-discord@master
           with:
-            args: 'O projeto POC foi atualizado em homologação'
+            args: 'O projeto ${{ github.event.repository.name }} foi atualizado em homologação'

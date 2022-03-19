@@ -1,0 +1,14 @@
+name: pull-requests
+on:
+  pull_request:
+    types: [ opened, synchronize, reopened ]
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Discord notification
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        uses: Ilshidur/action-discord@master
+        with:
+          args: 'Pull Request aberto: ${{ github.event.pull_request.title }}'
