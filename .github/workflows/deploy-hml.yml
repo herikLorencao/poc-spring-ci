@@ -50,7 +50,7 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SERVER_SECRET_KEY }}
           dokku-host: '${{ secrets.SERVER_HOST }}'
-          app-name: 'poc'
+          app-name: 'poc-hml'
           remote-branch: 'develop'
   discord-notification:
       runs-on: ubuntu-latest
